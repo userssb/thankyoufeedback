@@ -18,14 +18,15 @@
 }
 .emoj-cont {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  /* align-items: center; */
+  list-style-type: none;
 }
 .emoji {
   height: 50px;
   width: 50px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .app-container {
   display: flex;

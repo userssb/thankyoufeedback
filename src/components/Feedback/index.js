@@ -4,63 +4,69 @@ import './index.css'
 
 class Feedback extends Component {
   state = {
-    isFeedbackSelected: false,
+    isSelected: true,
   }
 
-  onClickEmoji = () => this.setState({isFeedbackSelected: true})
+  onClickEmoji = () => {
+    this.setState({isSelected: !isSelected})
+  }
 
-  renderFeedbackQuestion = () => {
+  renderQuestion = () => {
+    const {isSelected} = this.state
     const {resources} = this.props
     const {emojis} = resources
 
     return (
-      <div className="feedback-question-container">
-        <h1 className="feedback-question">
-          How satisfied are you with our customer support performance?
-        </h1>
-        <ul className="emojis-list">
-          {emojis.map(emoji => (
-            <li key={emoji.id}>
-              <button
-                type="button"
-                className="emoji-btn"
-                onClick={this.onClickEmoji}
-              >
-                <img src={emoji.imageUrl} alt={emoji.name} className="emoji" />
-                <br />
-                <span className="emoji-name">{emoji.name}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+      <div className="bg-cont">
+        <div className="app-cont">
+          <h1>How satisfied are you with our customer support performance?</h1>
+          <ul className="emoj-cont">
+            {emojis.map(eachemoji => (
+              <li key={eachemoji.id}>
+                <button
+                  type="button"
+                  className="emoji-btn"
+                  onClick={this.onClickEmoji}
+                >
+                  <img
+                    src={eachemoji.imageUrl}
+                    alt={eachemoji.name}
+                    className="emoji"
+                  />
+                  <br /> <p>{eachemoji.name}</p>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
 
-  renderThankYouScreen = () => {
+  renderThanksScreen = () => {
     const {resources} = this.props
     const {loveEmojiUrl} = resources
 
     return (
-      <div className="thank-you-container">
-        <img src={loveEmojiUrl} alt="love emoji" className="love-emoji" />
-        <h1 className="thank-you-text">Thank You!</h1>
-        <p className="description">
-          We will use your feedback to improve our customer support performance.
-        </p>
+      <div className="bg-cont">
+        <div className="app-cont">
+          <img src={loveEmojiUrl} alt="love emoji" className="love-image" />
+          <h1 className="thank-you-text">Thank You!</h1>
+          <p className="description">
+            We will use your feedback to improve our customer support
+            performance.
+          </p>
+        </div>
       </div>
     )
   }
 
   render() {
-    const {isFeedbackSelected} = this.state
-
+    const {isSelected} = this.state
     return (
       <div className="app-container">
         <div className="feedback-card">
-          {isFeedbackSelected
-            ? this.renderThankYouScreen()
-            : this.renderFeedbackQuestion()}
+          {isSelected ? this.renderQuestion() : this.renderThanksScreen()}
         </div>
       </div>
     )
